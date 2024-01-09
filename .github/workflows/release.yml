@@ -24,15 +24,15 @@ jobs:
       - name: Set current date as environment variable
         run: echo "DATE=`date +'%Y.%m.%d'`" >>$GITHUB_ENV
 
-      - name: Building TCET Linux Multilang compiler Tar file
+      - name: Building TCET Linux Code Runner Tar file
         run: |
           cd ..
-          touch tcet-linux-multilang-compiler.tar.gz
-          tar -czf tcet-linux-multilang-compiler.tar.gz tcet-linux-multilang-compiler/
+          touch tcet-linux-code-runner.tar.gz
+          tar -czf tcet-linux-code-runner.tar.gz tcet-linux-code-runner/
           touch checksum
-          sha256sum tcet-linux-multilang-compiler.tar.gz > checksum
-          mv checksum tcet-linux-multilang-compiler/
-          mv tcet-linux-multilang-compiler.tar.gz tcet-linux-multilang-compiler/
+          sha256sum tcet-linux-code-runner.tar.gz > checksum
+          mv checksum tcet-linux-code-runner/
+          mv tcet-linux-code-runner.tar.gz tcet-linux-code-runner/
           
       - name: Checking if release with date tag exist
         run: |
@@ -63,10 +63,10 @@ jobs:
           gh release delete latest
       - name: Release Tar File
         run: |
-          gh release create ${{ env.DATE }} *tar.gz checksum --title "Tcet-Linux-Multilang-Compiler"
+          gh release create ${{ env.DATE }} *tar.gz checksum --title "Tcet-Linux-Code-Runner"
       - name: Release Tar File with latest
         run: |
-          gh release create latest *tar.gz checksum --latest --title "Tcet-Linux-Multilang-Compiler"
+          gh release create latest *tar.gz checksum --latest --title "Tcet-Linux-Code-Runner"
       - name: Triggered PKGBUILD Action
         run: |
           curl -L \
